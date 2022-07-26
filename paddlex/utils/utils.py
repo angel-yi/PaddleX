@@ -181,8 +181,8 @@ class Timer(Times):
         total_time = self.preprocess_time_s.value(
         ) + self.inference_time_s.value() + self.postprocess_time_s.value()
         total_time = round(total_time, 4)
-        print("------------------ Inference Time Info ----------------------")
-        print("total_time(ms): {}, img_num: {}, batch_size: {}".format(
+        logging.info("------------------ Inference Time Info ----------------------")
+        logging.info("total_time(ms): {}, img_num: {}, batch_size: {}".format(
             total_time * 1000, self.img_num, self.img_num / self.repeats))
         preprocess_time = round(
             self.preprocess_time_s.value() / self.repeats,
@@ -194,9 +194,9 @@ class Timer(Times):
                                4) if average else self.inference_time_s.value()
 
         average_latency = total_time / self.repeats
-        print("average latency time(ms): {:.2f}, QPS: {:2f}".format(
+        logging.info("average latency time(ms): {:.2f}, QPS: {:2f}".format(
             average_latency * 1000, 1 / average_latency))
-        print("preprocess_time_per_im(ms): {:.2f}, "
+        logging.info("preprocess_time_per_im(ms): {:.2f}, "
               "inference_time_per_batch(ms): {:.2f}, "
               "postprocess_time_per_im(ms): {:.2f}".format(
                   preprocess_time * 1000, inference_time * 1000,
